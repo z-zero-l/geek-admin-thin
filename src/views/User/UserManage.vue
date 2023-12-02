@@ -36,7 +36,7 @@ import { View } from '@element-plus/icons-vue'
 import { UserApi } from '@/api/modules/user'
 import { ElMessageBox } from 'element-plus'
 import { useDownload } from '@/hooks/useDownload'
-import { useDate } from '@/hooks/useDate'
+// import { useDate } from '@/hooks/useDate'
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref()
@@ -59,11 +59,11 @@ const getTableList = (params: any) => {
 
 // 表格配置项
 const columns: ColumnProps<UserType>[] = [
-  // { type: 'selection', fixed: 'left', width: 60 },
+  { type: 'selection', fixed: 'left', width: 60 },
   {
     prop: 'avatar',
     label: '头像',
-    width: 70,
+    width: 80,
     render: (scope) => {
       return (
         <div class={['flex', 'justify-center', 'p-1']}>
@@ -76,11 +76,10 @@ const columns: ColumnProps<UserType>[] = [
   {
     prop: 'nickname',
     label: '用户名',
-    width: 100,
+    width: 120,
     search: { el: 'input' }
   },
-  { prop: 'phone', label: '手机号', search: { el: 'input' }, width: 120 },
-  { prop: 'company', label: '公司' },
+  { prop: 'mobile', label: '手机号', search: { el: 'input' }, width: 150 },
   {
     prop: 'gender',
     label: '性别',
@@ -102,37 +101,38 @@ const columns: ColumnProps<UserType>[] = [
       return <el-tag type={type}>{scope.row.gender === 0 ? '男' : '女'}</el-tag>
     }
   },
+  // {
+  //   prop: 'isCertified',
+  //   label: '是否会员',
+  //   width: 100,
+  //   enum: [
+  //     {
+  //       certifiedLabel: '否',
+  //       certifiedValue: 0
+  //     },
+  //     {
+  //       certifiedLabel: '是',
+  //       certifiedValue: 1
+  //     }
+  //   ],
+  //   search: { el: 'select', props: { filterable: true } },
+  //   fieldNames: { label: 'certifiedLabel', value: 'certifiedValue' },
+  //   render: (scope) => {
+  //     let flag = useDate().compare(scope.row.endTime!)
+  //     return <el-tag type={flag ? 'success' : 'info'}>{flag ? '是' : '否'}</el-tag>
+  //   }
+  // },
   {
-    prop: 'isCertified',
-    label: '是否会员',
-    width: 100,
-    enum: [
-      {
-        certifiedLabel: '否',
-        certifiedValue: 0
-      },
-      {
-        certifiedLabel: '是',
-        certifiedValue: 1
-      }
-    ],
-    search: { el: 'select', props: { filterable: true } },
-    fieldNames: { label: 'certifiedLabel', value: 'certifiedValue' },
-    render: (scope) => {
-      let flag = useDate().compare(scope.row.endTime!)
-      return <el-tag type={flag ? 'success' : 'info'}>{flag ? '是' : '否'}</el-tag>
-    }
+    prop: 'birthday',
+    label: '生日',
+    width: 150
   },
-  {
-    prop: 'endTime',
-    label: '会员到期时间',
-    width: 200
-  },
-  {
-    prop: 'createTime',
-    label: '创建时间',
-    width: 200
-  },
+  { prop: 'profession', label: '职业', width: 150 },
+  // {
+  //   prop: 'createTime',
+  //   label: '创建时间',
+  //   width: 200
+  // },
   { prop: 'operation', label: '操作', fixed: 'right', width: 340 }
 ]
 
